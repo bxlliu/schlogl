@@ -1,6 +1,6 @@
 // MCSim the option pricing
 
-#include <SimpleMCMain1.h>
+// #include <SimpleMCMain1.h>
 #include <Random1.h>
 #include <iostream>
 #include <cmath>
@@ -26,7 +26,7 @@ double SimpleMonteCarlo1(double Expiry, double Strike,
         runningSum += thisPayoff;
     }
 
-    double mean{runningSum / NumberOfPaths};
+    double mean{runningSum / static_cast<double>(NumberOfPaths)};
     mean *= std::exp(-r * Expiry);
     return mean;
 }
@@ -57,12 +57,17 @@ int main()
     std::cout << "\nNumber of Paths\n";
     std::cin >> NumberOfPaths;
 
-    double result{0};
-    //result = SimpleMonteCarlo1{Expiry, Strike, Spot, Vol, r, NumberOfPaths};
+    double result{ SimpleMonteCarlo1(Expiry, 
+                                    Strike, 
+                                    Spot, 
+                                    Vol, 
+                                    r, 
+                                    NumberOfPaths)};
     
-    std::cout << "The option price is " << result << "\n";
+    std::cout << "\nThe option price is " << result << "\n";
 
     double tmp{0};
+    std::cout << "\nType anything to continue\n";
     std::cin >> tmp;
 
     return 0;
