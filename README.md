@@ -1,2 +1,2 @@
 # schlogl
-My implementation of Schlogl's C++ QF textbook
+My implementation of Mark Joshi's C++ Book
