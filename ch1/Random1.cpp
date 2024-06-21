@@ -5,6 +5,7 @@
 #include <cmath>
 
 double GetOneGaussianBySummation()
+// aka Irwin Hall Distribution
 {
     double result{0};
 
@@ -17,6 +18,7 @@ double GetOneGaussianBySummation()
 }
 
 double GetOneGaussianByBoxMuller()
+// Box-Muller from Polar form
 {
     double result{0};
     double x{0};

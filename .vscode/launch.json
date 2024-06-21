@@ -5,10 +5,10 @@
             "name": "g++ - Build and Debug Active File",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main", // Path to the executable
+            "program": "${fileDirname}/main", // Path to the executable for ch1
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",

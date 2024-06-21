@@ -31,7 +31,8 @@ double SimpleMonteCarlo1(double Expiry, double Strike,
     return mean;
 }
 
-int main()
+int main_og()
+// changed the function name ; if you want to run this change it back
 {
     double Expiry{0};
     double Strike{0};
@@ -72,3 +73,4 @@ int main()
 
     return 0;
 }
+
