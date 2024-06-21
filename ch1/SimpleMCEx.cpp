@@ -7,93 +7,6 @@
 #include <cmath>
 #include <stdexcept>
 
-double VanillaMC(double Expiry, double Strike,
-                        double Spot, double Vol, double r,
-                        unsigned long NumberOfPaths, std::string optionType)
-    // This is a MC pricer for a Euro Call
-{   
-    if(!(optionType == "PUT" || optionType == "CALL"))
-    {
-        throw std::invalid_argument("invalid option type");
-    }
-    double variance{Vol * Vol * Expiry};
-    double rootVariance{std::sqrt(variance)};
-    double itoCorrection{-0.5 * variance};
-
-    double movedSpot{Spot * std::exp(r * Expiry + itoCorrection)};
-    double thisSpot{0};
-    double runningSum{0};
-
-    for (unsigned long i{0}; i < NumberOfPaths; ++i)
-    {
-        thisSpot = movedSpot * std::exp(rootVariance * GetOneGaussianByBoxMuller());
-        double thisPayoff{thisSpot - Strike};
-        if (optionType == "CALL")
-        {
-            thisPayoff = thisPayoff > 0 ? thisPayoff : 0;
-        }
-        else
-        {
-            thisPayoff = thisPayoff < 0 ? -thisPayoff : 0;
-        }
-        runningSum += thisPayoff;
-    }
-
-    double mean{runningSum / static_cast<double>(NumberOfPaths)};
-    mean *= std::exp(-r * Expiry);
-    return mean;
-}
-
-double VanillaCaller(std::string optionType)
-{
-    double Expiry{0};
-    double Strike{0};
-    double Spot{0};
-    double Vol{0};
-    double r{0};
-    unsigned long NumberOfPaths{0};
-
-    std::cout << "\nEnter Expiry\n";
-    std::cin >> Expiry;
-
-    std::cout << "\nEnter Strike\n";
-    std::cin >> Strike;
-
-    std::cout << "\nEnter Spot\n";
-    std::cin >> Spot;
-
-    std::cout << "\nEnter Vol\n";
-    std::cin >> Vol;
-
-    std::cout << "\nEnter r\n";
-    std::cin >> r;
-
-    std::cout << "\nNumber of Paths\n";
-    std::cin >> NumberOfPaths;
-
-    try
-    {
-        double result{ VanillaMC(Expiry, 
-                                    Strike, 
-                                    Spot, 
-                                    Vol, 
-                                    r, 
-                                    NumberOfPaths,
-                                    optionType)};
-        return result;
-    } 
-    catch (const std::invalid_argument& err)
-    {
-        std::cout << err.what();
-    }
-
-    double tmp{0};
-    std::cout << "\nType anything to continue\n";
-    std::cin >> tmp;
-
-    return 0;
-}
-
 double CalcPayoff(std::string optionType, double Spot, 
                     double Strike1, double Strike2 = 0)
 {
@@ -199,7 +112,6 @@ int main()
 
     if(optionType == "PUT" || optionType == "CALL" || optionType == "DD")
     {
-        //optPrice = VanillaCaller(optionType);
         optPrice = GenCaller(optionType);
     }
     else
