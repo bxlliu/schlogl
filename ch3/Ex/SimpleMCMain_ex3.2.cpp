@@ -74,8 +74,9 @@ int main()
                                             (UpperStrike, Power);
             break;
 
-        case 5:
-            throw std::invalid_argument("invalid payoff");
+        default:
+            std::cout << "invalid payoff";
+            return 1;
     }
 
     double result{SimpleMonteCarlo2(*thePayOffPtr, Expiry, Spot, Vol, r,
