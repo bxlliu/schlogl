@@ -2,6 +2,7 @@
 #include<iostream>
 
 int main()
+// change this back if you wanna run it
 {
     double Expiry{0};
     double Strike{0};
