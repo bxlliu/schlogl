@@ -1,9 +1,9 @@
 #include<Vanilla2.h>
 
 VanillaOption::VanillaOption(const PayOff& ThePayOff_, double Expiry_)
-                            : Expiry(Expiry_)
+                            : ThePayOffPtr(ThePayOff_.clone()), Expiry(Expiry_)
 {
-    ThePayOffPtr = ThePayOff_.clone();
+    //ThePayOffPtr = ThePayOff_.clone();
 }
 
 double VanillaOption::GetExpiry() const
@@ -17,9 +17,11 @@ double VanillaOption::OptionPayOff(double Spot) const
 }
 
 VanillaOption::VanillaOption(const VanillaOption& original)
+                            : ThePayOffPtr(original.ThePayOffPtr->clone()),
+                            Expiry(original.Expiry)
 {
-    Expiry = original.Expiry;
-    ThePayOffPtr = original.ThePayOffPtr->clone();
+    //Expiry = original.Expiry;
+    //ThePayOffPtr = original.ThePayOffPtr->clone();
 }
 
 VanillaOption& VanillaOption::operator=(const VanillaOption& original)

@@ -3,7 +3,7 @@
 #include<iostream>
 #include<DoubleDigital.h>
 
-int main1()
+int main()
 {
     double Expiry{0};
     double Vol{0};

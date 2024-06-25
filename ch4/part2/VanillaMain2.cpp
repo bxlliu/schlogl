@@ -8,8 +8,6 @@ int main()
     double Expiry{0};
     double Vol{0};
     double Strike{0};
-    //double Low{0};
-    //double Up{0};
     double r{0};
     double Spot{0};
     unsigned long NumberOfPaths{0};
@@ -19,12 +17,6 @@ int main()
     
     std::cout << "\nEnter strike\n";
     std::cin >> Strike;
-
-    //std::cout << "\nEnter low barrier\n";
-    //std::cin >> Low;
-
-    //std::cout << "\nEnter upper barrier\n";
-    //std::cin >> Up;
 
     std::cout << "\nEnter spot\n";
     std::cin >> Spot;
@@ -38,7 +30,6 @@ int main()
     std::cout << "\nNumber of Paths\n";
     std::cin >> NumberOfPaths;
 
-    //PayOffDoubleDigital thePayOff(Low,Up);
     PayOffCall thePayOff(Strike);
     VanillaOption theOption(thePayOff, Expiry);
 
@@ -48,14 +39,14 @@ int main()
 
     VanillaOption secondOption(theOption);
     result = SimpleMonteCarlo3(secondOption, Spot, Vol, r, NumberOfPaths);
-    std::cout << "\n the second call price is " << result << "\n";
+    std::cout << "\nthe second call price is " << result << "\n";
 
     PayOffPut otherPayOff(Strike);
     VanillaOption thirdOption(otherPayOff, Expiry);
     theOption = thirdOption;
 
     result = SimpleMonteCarlo3(theOption, Spot, Vol, r, NumberOfPaths);
-    std::cout << "\n the put price is " << result << "\n";
+    std::cout << "\nthe put price is " << result << "\n";
 
     double tmp;
     std::cin >> tmp;
