@@ -55,6 +55,8 @@ int main()
                                     NumberOfPaths);
     std::cout << "\nthe put price is " << result << "\n";
 
+    std::cout << "\n" << VolParam.Integral(0.5, 3.5) << "\n";
+
     double tmp;
     std::cin >> tmp;
     return 0;
